@@ -23,8 +23,8 @@ public class CardPanel extends JPanel {
         button.addActionListener(actionEvent -> {
             if (player.playCard(card)){
             remove(button);}
-            repaint();
             revalidate();
+            repaint();
         });
         return button;
     }

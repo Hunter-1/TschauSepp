@@ -5,6 +5,8 @@ import View.TablePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Frame extends JFrame {
     Spieler[] players;
@@ -16,7 +18,6 @@ public class Frame extends JFrame {
         this.table = table;
         this.setResizable(false);
         mainPanel.add(tableLabel);
-        //debug();
         addPanels();
         this.pack();
         this.setVisible(true);
@@ -31,12 +32,6 @@ public class Frame extends JFrame {
             i++;
         }
         return panel;
-    }
-    public void debug(){
-        players[0].toText();
-        players[1].toText();
-        players[2].toText();
-        players[3].toText();
     }
     public void addPanels(){
         mainPanel.setLayout(new BorderLayout());
