@@ -9,7 +9,7 @@ public class Spieler {
     public Spieler(Stapel stack, Tisch table) {
         this.stack = stack;
         this.table = table;
-        cards = new ArrayList<Karte>();
+        cards = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             this.getNewCard();
         }
@@ -25,14 +25,13 @@ public class Spieler {
                 || table.getCard().getSuit().equals(card.getSuit())) {
         table.setCard(card);
         cards.remove(card);
-        System.out.println("can play card");
-        toText();
+        table.setOutput("can play card");
         if (cards.isEmpty()){
             gewinnen();
         }
         return true;
         } else {
-        System.out.println("cant play card");
+            table.setOutput("can't play card");
         return false;}
     }
     public ArrayList<Karte> getCards() { return cards; }

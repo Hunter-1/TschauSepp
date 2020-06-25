@@ -14,6 +14,6 @@ public class Karte {
     public Spieler getPlayer() { return player; }
     public void setPlayer(Spieler player) { this.player = player; }
     public String toText(){
-        return suit + value;
+        return suit + " " + value;
     }
 }
