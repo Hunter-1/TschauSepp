@@ -35,9 +35,20 @@ public class Frame extends JFrame {
         return panel;
     }
     public void addPanels(){
+        mainPanel.removeAll();
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(new TablePanel(game.getTable()), BorderLayout.NORTH);
+        mainPanel.add(new TablePanel(game), BorderLayout.NORTH);
         mainPanel.add(createPlayerPanels(), BorderLayout.CENTER);
         this.add(mainPanel);
+        int delay = 100;
+        ActionListener taskPerformer = actionEvent -> {
+            mainPanel.removeAll();
+            mainPanel.setLayout(new BorderLayout());
+            mainPanel.add(new TablePanel(game), BorderLayout.NORTH);
+            mainPanel.add(createPlayerPanels(), BorderLayout.CENTER);
+            this.add(mainPanel);
+        };
+        new Timer(delay,taskPerformer).start();
+
     }
 }

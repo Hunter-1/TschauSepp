@@ -4,6 +4,8 @@ import Model.Karte;
 import Model.Spieler;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class CardPanel extends JPanel {
     Spieler player;
@@ -15,7 +17,6 @@ public class CardPanel extends JPanel {
         for (Karte card: player.getCards()) {
             JButton button = createCardButton(card);
             this.add(button);
-
         }
     }
     public JButton createCardButton(Karte card){

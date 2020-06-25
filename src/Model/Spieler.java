@@ -7,11 +7,13 @@ public class Spieler {
     private final Stapel stack;
     private final Tisch table;
     private final Game game;
+    private final int num;
     private boolean active = false;
-    public Spieler(Stapel stack, Tisch table, Game game) {
+    public Spieler(Stapel stack, Tisch table, Game game,int num) {
         this.stack = stack;
         this.table = table;
         this.game = game;
+        this.num = num;
         cards = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             this.getNewCard();
@@ -22,7 +24,12 @@ public class Spieler {
         Karte card = stack.createCard();
         card.setPlayer(this);
         cards.add(card);
+        toText();
     }
+    public boolean canGetNewCard(){
+        return true;
+    }
+
     public void playCard(Karte card){
                 table.setCard(card);
                 cards.remove(card);
@@ -37,7 +44,7 @@ public class Spieler {
                     || table.getCard().getSuit().equals(card.getSuit())) {
                 return true;
             } else {
-                table.setOutput("Ungültige Karte, Tischakarte ist " + table.getCard().toText());
+                table.setOutput("Ungültige Karte, Tisch karte ist " + table.getCard().toText());
                 return false;
             }
         }
@@ -74,5 +81,9 @@ public class Spieler {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getNum() {
+        return num;
     }
 }

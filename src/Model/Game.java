@@ -12,11 +12,10 @@ public class Game {
         this.table = t;
         this.players = new Spieler[playercount];
         for (int i = 0; i < playercount; i++) {
-            players[i] = new Spieler(stack, table, this);
+            players[i] = new Spieler(stack, table, this,i);
         }
         incrementPlayerTurns();
     }
-
     public void incrementPlayerTurns() {
         for (Spieler p:players
         ) {
@@ -27,7 +26,7 @@ public class Game {
             turns = 0;
         }
     }
-
+    public int getTurns() { return turns; }
     public int getPlayercount() { return playercount; }
     public void setPlayercount(int playercount) { this.playercount = playercount; }
     public Stapel getStack() { return stack; }
