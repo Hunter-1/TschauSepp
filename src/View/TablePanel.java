@@ -10,7 +10,6 @@ public class TablePanel extends JPanel{
     JLabel tableLabel = new JLabel();
     JTextField output = new JTextField();
     Tisch table;
-    String outputText = "";
     public TablePanel(Tisch table) {
         this.table=table;
         updateTable();

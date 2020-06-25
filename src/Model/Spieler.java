@@ -6,9 +6,12 @@ public class Spieler {
     private ArrayList<Karte> cards;
     private final Stapel stack;
     private final Tisch table;
-    public Spieler(Stapel stack, Tisch table) {
+    private final Game game;
+    private boolean active = false;
+    public Spieler(Stapel stack, Tisch table, Game game) {
         this.stack = stack;
         this.table = table;
+        this.game = game;
         cards = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             this.getNewCard();
@@ -20,19 +23,26 @@ public class Spieler {
         card.setPlayer(this);
         cards.add(card);
     }
-    public boolean playCard(Karte card){
-        if (table.getCard().getValue().equals(card.getValue())
-                || table.getCard().getSuit().equals(card.getSuit())) {
-        table.setCard(card);
-        cards.remove(card);
-        table.setOutput("can play card");
-        if (cards.isEmpty()){
-            gewinnen();
+    public void playCard(Karte card){
+                table.setCard(card);
+                cards.remove(card);
+                if (cards.isEmpty()) {
+                    gewinnen();
+                }
+                game.incrementPlayerTurns();
+    }
+    public boolean canPlayCard(Karte card){
+        if (active) {
+            if (table.getCard().getValue().equals(card.getValue())
+                    || table.getCard().getSuit().equals(card.getSuit())) {
+                return true;
+            } else {
+                table.setOutput("Ungültige Karte, Tischakarte ist " + table.getCard().toText());
+                return false;
+            }
         }
-        return true;
-        } else {
-            table.setOutput("can't play card");
-        return false;}
+        table.setOutput("Diese Spieler ist nicht am Zug!");
+        return false;
     }
     public ArrayList<Karte> getCards() { return cards; }
     public void setCards(ArrayList<Karte> cards) { this.cards = cards; }
@@ -56,5 +66,13 @@ public class Spieler {
     }
     public void gewinnen() {
         System.exit(777);
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

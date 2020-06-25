@@ -21,7 +21,8 @@ public class CardPanel extends JPanel {
     public JButton createCardButton(Karte card){
         JButton button = new JButton(card.toText());
         button.addActionListener(actionEvent -> {
-            if (player.playCard(card)){
+            if (player.canPlayCard(card)){
+                player.playCard(card);
             remove(button);}
             revalidate();
             repaint();
