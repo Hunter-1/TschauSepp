@@ -10,16 +10,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class Frame extends JFrame {
     Game game;
     JPanel mainPanel = new JPanel();
-    JPanel bigplayerPanel;
-    JLabel tableLabel = new JLabel();
+    ArrayList<PlayerPanel> playerPanels = new ArrayList<>();
     public Frame(Game g) {
         this.game = g;
         this.setResizable(false);
-        
+
         addPanels();
         this.pack();
         this.setSize(this.getWidth(),this.getHeight()+100);
@@ -31,17 +31,18 @@ public class Frame extends JFrame {
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         for (Spieler player: game.getPlayers()
              ) {
-            panel.add(new PlayerPanel(player,i,table));
+            PlayerPanel playerpanel = new PlayerPanel(player,i,table);
+            panel.add(playerpanel);
+            playerPanels.add(playerpanel);
             i++;
         }
         return panel;
     }
     public void addPanels(){
-        TablePanel table = new TablePanel(game);
+        TablePanel table = new TablePanel(game,playerPanels);
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(table, BorderLayout.NORTH);
-        bigplayerPanel = createPlayerPanels(table);
-        mainPanel.add(bigplayerPanel, BorderLayout.CENTER);
+        mainPanel.add(createPlayerPanels(table), BorderLayout.CENTER);
         this.add(mainPanel);
     }
 }

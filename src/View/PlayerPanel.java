@@ -9,6 +9,7 @@ public class PlayerPanel extends JPanel {
     Spieler player;
     int playerNum;
     TablePanel table;
+    CardPanel cardPanel;
     public PlayerPanel(Spieler player, int num, TablePanel table) {
         this.player = player;
         this.table = table;
@@ -18,8 +19,9 @@ public class PlayerPanel extends JPanel {
     }
     public void init(){
         this.add(new JLabel("Player " + playerNum));
+        this.cardPanel = new CardPanel(player, table);
         JScrollPane scroll = new JScrollPane(
-                new CardPanel(player, table),
+                cardPanel,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS
         );

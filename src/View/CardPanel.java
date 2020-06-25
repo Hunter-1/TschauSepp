@@ -34,4 +34,8 @@ public class CardPanel extends JPanel {
         });
         return button;
     }
+    public void reset(){
+        this.removeAll();
+        init();
+    }
 }

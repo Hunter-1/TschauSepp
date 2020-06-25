@@ -25,6 +25,11 @@ public class Spieler {
         card.setPlayer(this);
         cards.add(card);
     }
+    public Karte returnNewCard(){
+        Karte card = stack.createCard();
+        card.setPlayer(this);
+        return card;
+    }
     public boolean canGetNewCard(){
         return true;
     }

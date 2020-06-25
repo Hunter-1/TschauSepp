@@ -8,15 +8,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class TablePanel extends JPanel{
     JLabel tableLabel = new JLabel();
     JTextField output = new JTextField();
     JButton drawCard = new JButton();
+    ArrayList<PlayerPanel> playerPanels;
     Game game;
-    public TablePanel(Game game) {
+    public TablePanel(Game game, ArrayList<PlayerPanel> panel){
         this.game=game;
-
+        this.playerPanels=panel;
         output.setColumns(30);
         output.setEditable(false);
         drawCard.setText("Karte Ziehen");
@@ -25,6 +27,8 @@ public class TablePanel extends JPanel{
             Spieler player = game.getPlayers()[game.getTurns()];
             if (player.canGetNewCard()) {
                 player.getNewCard();
+                playerPanels.get(game.getTurns()).cardPanel.reset();
+                System.out.println("test");
                 game.incrementPlayerTurns();
                 updateTable();
             }
