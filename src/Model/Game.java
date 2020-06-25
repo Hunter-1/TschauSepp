@@ -6,7 +6,7 @@ public class Game {
     Tisch table;
     Spieler[] players;
     int turns = 0;
-    public Game(int playercount, Stapel s, Tisch t) {
+    public Game(Integer playercount, Stapel s, Tisch t) {
         this.playercount = playercount;
         this.stack = s;
         this.table = t;
