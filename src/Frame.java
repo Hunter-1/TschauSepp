@@ -14,41 +14,34 @@ import java.awt.event.MouseListener;
 public class Frame extends JFrame {
     Game game;
     JPanel mainPanel = new JPanel();
+    JPanel bigplayerPanel;
     JLabel tableLabel = new JLabel();
     public Frame(Game g) {
         this.game = g;
         this.setResizable(false);
-        mainPanel.add(tableLabel);
+        
         addPanels();
         this.pack();
+        this.setSize(this.getWidth(),this.getHeight()+100);
         this.setVisible(true);
     }
-    public JPanel createPlayerPanels(){
+    public JPanel createPlayerPanels(TablePanel table){
         int i = 1;
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         for (Spieler player: game.getPlayers()
              ) {
-            panel.add(new PlayerPanel(player,i));
+            panel.add(new PlayerPanel(player,i,table));
             i++;
         }
         return panel;
     }
     public void addPanels(){
-        mainPanel.removeAll();
+        TablePanel table = new TablePanel(game);
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(new TablePanel(game), BorderLayout.NORTH);
-        mainPanel.add(createPlayerPanels(), BorderLayout.CENTER);
+        mainPanel.add(table, BorderLayout.NORTH);
+        bigplayerPanel = createPlayerPanels(table);
+        mainPanel.add(bigplayerPanel, BorderLayout.CENTER);
         this.add(mainPanel);
-        int delay = 100;
-        ActionListener taskPerformer = actionEvent -> {
-            mainPanel.removeAll();
-            mainPanel.setLayout(new BorderLayout());
-            mainPanel.add(new TablePanel(game), BorderLayout.NORTH);
-            mainPanel.add(createPlayerPanels(), BorderLayout.CENTER);
-            this.add(mainPanel);
-        };
-        new Timer(delay,taskPerformer).start();
-
     }
 }

@@ -2,6 +2,7 @@ package View;
 
 import Model.Karte;
 import Model.Spieler;
+import javafx.scene.control.Tab;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,10 @@ import java.awt.event.ActionListener;
 
 public class CardPanel extends JPanel {
     Spieler player;
-    public CardPanel(Spieler player) {
+    TablePanel table;
+    public CardPanel(Spieler player, TablePanel table) {
         this.player = player;
+        this.table = table;
         init();
     }
     public void init(){
@@ -25,8 +28,9 @@ public class CardPanel extends JPanel {
             if (player.canPlayCard(card)){
                 player.playCard(card);
             remove(button);}
-            revalidate();
-            repaint();
+            table.updateTable();
+            this.revalidate();
+            this.repaint();
         });
         return button;
     }

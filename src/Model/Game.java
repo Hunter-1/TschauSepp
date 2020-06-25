@@ -12,20 +12,25 @@ public class Game {
         this.table = t;
         this.players = new Spieler[playercount];
         for (int i = 0; i < playercount; i++) {
-            players[i] = new Spieler(stack, table, this,i);
+            players[i] = new Spieler(stack, table, this,i+1);
         }
-        incrementPlayerTurns();
-    }
-    public void incrementPlayerTurns() {
+        System.out.println(turns);
         for (Spieler p:players
         ) {
             p.setActive(players[turns] == p);
         }
+    }
+    public void incrementPlayerTurns() {
         turns++;
         if (turns == players.length){
             turns = 0;
         }
+        for (Spieler p:players
+        ) {
+            p.setActive(players[turns] == p);
+        }
     }
+    public void setTurns(int turns) { this.turns = turns;}
     public int getTurns() { return turns; }
     public int getPlayercount() { return playercount; }
     public void setPlayercount(int playercount) { this.playercount = playercount; }
